@@ -56,14 +56,14 @@ class LogInViewController: UIViewController {
     private let registerLabel: UILabel = {
         let label = UILabel()
         label.text = "Don't have an account yet?"
-        label.font = .systemFont(ofSize: 14, weight: .light)
+        label.font = .systemFont(ofSize: 18, weight: .light)
         return label
     }()
     
     private let registerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Register!", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .light)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .light)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(registerTapped(_:)), for: .touchUpInside)
         return button
@@ -72,7 +72,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,7 +112,7 @@ class LogInViewController: UIViewController {
         // Add Log In Button
         logInButton.frame = CGRect(
             x: (view.width / 2) - (view.width * 0.125),
-            y: passwordTextField.bottom + 30,
+            y: passwordTextField.bottom + 50,
             width: view.width * 0.25,
             height: 50
         )
@@ -122,7 +122,7 @@ class LogInViewController: UIViewController {
         registerLabel.frame = CGRect(
             x: view.width * 0.1,
             y: logInButton.bottom + 30,
-            width: view.width * 0.45,
+            width: view.width * 0.58,
             height: 30
         )
         view.addSubview(registerLabel)
@@ -147,7 +147,8 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func registerTapped(_ ender: UIButton) {
-        
+        let viewController = RegisterViewController()
+        navigationController?.pushViewController(viewController, animated: false)
     }
 }
 

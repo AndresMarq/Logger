@@ -7,22 +7,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class InitialViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        view.backgroundColor = .orange
-        title = "Placeholder" 
     }
-/*
+
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         let viewController = LogInViewController()
         let navigation = UINavigationController(rootViewController: viewController)
         navigation.modalPresentationStyle = .fullScreen
-        present (navigation, animated: false)
+        present(navigation, animated: false)
     }
- */
 }
 
