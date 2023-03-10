@@ -187,11 +187,47 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func registerButtonTapped() {
-        guard let user = validatedInputs() else {
+        guard let user = validatedInputs(), let password = passwordTextField.text else {
             return
         }
         
         spinner.show(in: view)
+        
+        // Check if user already exists in Database
+        DatabaseManager.shared.userExists(email: user.email, completion: { [weak self] exists in
+            DispatchQueue.main.async {
+                self?.spinner.dismiss()
+            }
+            
+            if exists {
+                self?.registrationError(message: "Email already being used")
+                return
+            }
+        })
+        
+        // If the user doesn't exists, add it to Database
+        FirebaseAuth.Auth.auth().createUser(withEmail: user.email, password: password, completion: { [weak self] result, error in
+            guard result != nil, error == nil else {
+                self?.registrationError(message: "Could not connect with database, please try again later")
+                return
+            }
+            
+            DatabaseManager.shared.addUser(user: user, completion: { success in
+                if success {
+                    // Upload image
+                    guard let image = self?.userImageButton.imageView?.image, let data = image.pngData() else {
+                        return
+                    }
+                    
+                    let filename = user.profilePictureFileName
+                    
+                    // Call storage manager to upload the image
+                }
+            })
+            
+            // Dismiss
+            self?.navigationController?.dismiss(animated: true)
+        })
     }
     
     // Returns user if all inputs are valid, otherwise returns nil
