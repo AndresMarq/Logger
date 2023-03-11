@@ -222,6 +222,14 @@ class RegisterViewController: UIViewController {
                     let filename = user.profilePictureFileName
                     
                     // Call storage manager to upload the image
+                    StorageManager.shared.uploadProfilePicture(with: data, filename: filename, completion: { result in
+                        switch result {
+                        case .success(let downloadURL):
+                            print(downloadURL)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    })
                 }
             })
             
