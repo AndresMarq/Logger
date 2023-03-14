@@ -25,6 +25,8 @@
 		9251D4F629B6DA9E00DDC2E6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9251D4F529B6DA9E00DDC2E6 /* User.swift */; };
 		9251D4F929B6DBC100DDC2E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9251D4F729B6DBC100DDC2E6 /* Main.storyboard */; };
 		9251D4FB29B6DC3000DDC2E6 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9251D4FA29B6DC3000DDC2E6 /* DatabaseManager.swift */; };
+		9286EC0A29BFF73D00ACA569 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9286EC0929BFF73C00ACA569 /* GoogleService-Info.plist */; };
+		9286EC0C29BFF91B00ACA569 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286EC0B29BFF91B00ACA569 /* ProfileViewController.swift */; };
 		ED06C64CD5C0497C74D2F84B /* Pods_LoggerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EBF0D2BC12F572B56486979 /* Pods_LoggerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		9251D4F529B6DA9E00DDC2E6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9251D4F829B6DBC100DDC2E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9251D4FA29B6DC3000DDC2E6 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		9286EC0929BFF73C00ACA569 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9286EC0B29BFF91B00ACA569 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AF5816E71AE4B84435E9F82F /* Pods_Logger_LoggerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Logger_LoggerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B054589CE7503EE1545F9600 /* Pods_Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE4DC0941B2D4ACEF7C334E4 /* Pods-Logger-LoggerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Logger-LoggerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Logger-LoggerUITests/Pods-Logger-LoggerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				920B5AF329B46E090045DAB3 /* Model */,
 				920B5AF129B46DEA0045DAB3 /* ViewControllers */,
 				920B5ACD29B468830045DAB3 /* Info.plist */,
+				9286EC0929BFF73C00ACA569 /* GoogleService-Info.plist */,
 			);
 			path = Logger;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				920B5AC329B468820045DAB3 /* InitialViewController.swift */,
 				920B5AEF29B46D260045DAB3 /* LogInViewController.swift */,
 				9251D4F329B6D53400DDC2E6 /* RegisterViewController.swift */,
+				9286EC0B29BFF91B00ACA569 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9251D4F929B6DBC100DDC2E6 /* Main.storyboard in Resources */,
+				9286EC0A29BFF73D00ACA569 /* GoogleService-Info.plist in Resources */,
 				920B5ACC29B468830045DAB3 /* LaunchScreen.storyboard in Resources */,
 				920B5AC929B468830045DAB3 /* Assets.xcassets in Resources */,
 			);
@@ -465,6 +472,7 @@
 				920B5AC429B468820045DAB3 /* InitialViewController.swift in Sources */,
 				9251D4F629B6DA9E00DDC2E6 /* User.swift in Sources */,
 				920B5AC029B468820045DAB3 /* AppDelegate.swift in Sources */,
+				9286EC0C29BFF91B00ACA569 /* ProfileViewController.swift in Sources */,
 				920B5AC229B468820045DAB3 /* SceneDelegate.swift in Sources */,
 				923BDA6329BC598E000D10FD /* StorageManager.swift in Sources */,
 				920B5AF729B46E630045DAB3 /* ViewExtension.swift in Sources */,

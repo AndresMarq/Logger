@@ -143,7 +143,29 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func logInTapped() {
+        // Ensures valid e-mail and password fields
+        guard let email = emailTextField.text, let password = passwordTextField.text, !email.isEmpty, !password.isEmpty else {
+            self.view.endEditing(true)
+            logInError(message: "Invalid Email or Password")
+            return
+        }
         
+        spinner.show(in: view)
+        
+        // Firebase log in
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+            DispatchQueue.main.async {
+                self?.spinner.dismiss()
+            }
+            
+            guard result != nil, error == nil else {
+                self?.logInError(message: "Invalid Email or Password")
+                return
+            }
+            
+            // Log in successful we can dimiss the view
+            self?.navigationController?.dismiss(animated: true)
+        })
     }
     
     @objc private func registerTapped(_ ender: UIButton) {

@@ -228,6 +228,7 @@ class RegisterViewController: UIViewController {
                             print(downloadURL)
                         case .failure(let error):
                             print(error)
+                            self?.registrationError(message: "Could not upload your image")
                         }
                     })
                 }
@@ -256,7 +257,7 @@ class RegisterViewController: UIViewController {
             return nil
         }
         
-        if passwordTextField == confirmPasswordTextField {
+        if password == confirmPassword {
             return User(firstName: firstName, lastName: lastName, id: UUID(), email: email)
         } else {
             registrationError(message: "Password fields do not match")

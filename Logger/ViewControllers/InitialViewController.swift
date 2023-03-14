@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import JGProgressHUD
 
 class InitialViewController: UIViewController {
 
@@ -16,10 +18,21 @@ class InitialViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let viewController = LogInViewController()
-        let navigation = UINavigationController(rootViewController: viewController)
-        navigation.modalPresentationStyle = .fullScreen
-        present(navigation, animated: false)
+        checkAuthentification()
+    }
+    
+    private func checkAuthentification() {
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            let viewController = LogInViewController()
+            let navigation = UINavigationController(rootViewController: viewController)
+            navigation.modalPresentationStyle = .fullScreen
+            present(navigation, animated: false)
+        } else {
+            let viewController = ProfileViewController()
+            let navigation = UINavigationController(rootViewController: viewController)
+            navigation.modalPresentationStyle = .fullScreen
+            present(navigation, animated: false)
+        }
     }
 }
 
