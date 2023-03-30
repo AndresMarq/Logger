@@ -271,7 +271,7 @@ class RegisterViewController: UIViewController {
         present(ac, animated: true)
     }
     
-    @objc private func tappedChangePic() {
+    @objc func tappedChangePic() {
         showPictureActionSheet()
     }
 }
