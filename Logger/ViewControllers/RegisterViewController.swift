@@ -214,6 +214,9 @@ class RegisterViewController: UIViewController {
             
             DatabaseManager.shared.addUser(user: user, completion: { success in
                 if success {
+                    // Cache email in User Defaults
+                    UserDefaults.standard.set(user.email, forKey: "email")
+                    
                     // Upload image
                     guard let image = self?.userImageButton.imageView?.image, let data = image.pngData() else {
                         return
@@ -254,6 +257,11 @@ class RegisterViewController: UIViewController {
               !lastName.isEmpty else {
             self.view.endEditing(true)
             registrationError(message: "All fields are required for registration")
+            return nil
+        }
+        
+        if password.count < 6 {
+            registrationError(message: "The password must be 6 characters long or more")
             return nil
         }
         

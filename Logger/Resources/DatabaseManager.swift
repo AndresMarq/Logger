@@ -12,6 +12,11 @@ final class DatabaseManager {
     static let shared = DatabaseManager()
     private let database = Database.database().reference()
     
+    static func databaseEmail(email: String) -> String {
+        let databaseEmail = email.replacingOccurrences(of: ".", with: "")
+        return databaseEmail
+    }
+    
     // Add new user to Firebase realtime Database
     public func addUser(user: User, completion: @escaping (Bool) -> Void) {
         database.child(user.databaseEmail).setValue([
