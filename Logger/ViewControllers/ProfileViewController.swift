@@ -10,17 +10,6 @@ import FirebaseAuth
 import SDWebImage
 
 class ProfileViewController: UIViewController {
-    /*
-    private let userImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "person.circle"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(tappedChangePic), for: .touchUpInside)
-        return button
-    }()
-     */
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -30,8 +19,6 @@ class ProfileViewController: UIViewController {
         imageView.layer.borderWidth = 3
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageView.width / 2
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(tappedChangePic)))
         return imageView
     }()
     
@@ -48,30 +35,25 @@ class ProfileViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         downloadURL(for: UserDefaults.standard.string(forKey: "email"))
+        view.backgroundColor = .systemBackground
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         let size = view.width / 3
-        /*
-        userImageButton.frame = CGRect(
+        
+        profileImageView.frame = CGRect(
             x: (view.width - size) / 2,
             y: 100,
             width: size,
             height: size
         )
-        userImageButton.layer.cornerRadius = userImageButton.width / 2
-        view.addSubview(userImageButton)
-        */
-        
-        profileImageView.frame = CGRect(x: (view.width - 150) / 2, y: 75, width: 150, height: 150)
+        profileImageView.layer.cornerRadius = profileImageView.width / 2
         view.addSubview(profileImageView)
         
         logOutButton.frame = CGRect(
@@ -91,90 +73,27 @@ class ProfileViewController: UIViewController {
             do {
                 try FirebaseAuth.Auth.auth().signOut()
                 
+                // Clear the image cache
+                SDImageCache.shared.clearMemory()
+                SDImageCache.shared.clearDisk()
+                
                 let viewController = LogInViewController()
                 let navigation = UINavigationController(rootViewController: viewController)
                 navigation.modalPresentationStyle = .fullScreen
                 self?.present (navigation, animated: false)
             }
             catch {
-                print("opps")
-                // MARK: -Implement log out error func
+                print("Error Loging Out")
+                self?.logOutError(message: "Please try again later")
             }
         }))
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(ac, animated: true)
     }
-    
-    @objc private func tappedChangePic() {
-        showPictureActionSheet()
-    }
 }
 
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func showPictureActionSheet() {
-        let sheet = UIAlertController(title: "Select Profile Picture", message: "Preferred method", preferredStyle: .actionSheet)
-        sheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: { [weak self] _ in
-            self?.useCamera()
-        }))
-        sheet.addAction(UIAlertAction(title: "Library", style: .default, handler: { [weak self] _ in
-            self?.useLibrary()
-        }))
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        present(sheet, animated: true)
-    }
-    
-    func useCamera() {
-        let controller = UIImagePickerController()
-        controller.sourceType = .camera
-        controller.delegate = self
-        controller.allowsEditing = true
-        present(controller, animated: true)
-    }
-    
-    func useLibrary() {
-        let controller = UIImagePickerController()
-        controller.sourceType = .photoLibrary
-        controller.delegate = self
-        controller.allowsEditing = true
-        present(controller, animated: true)
-    }
-    
-    func uploadProfilePicture(image: UIImage) {
-        guard let data = image.pngData(), let email = UserDefaults.standard.string(forKey: "email") else {
-            return
-        }
-        
-        let databaseEmail = DatabaseManager.databaseEmail(email: email)
-        let filename = databaseEmail + "_profile_picture.png"
-        
-        StorageManager.shared.uploadProfilePicture(with: data, filename: filename, completion: { [weak self] result in
-            switch result {
-            case .success(let downloadURL):
-                guard let url = URL(string: downloadURL) else { return }
-                DispatchQueue.main.async {
-                    self?.profileImageView.sd_setImage(with: url)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        })
-    }
-    
-    // Called when user takes or select photo
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true)
-        
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
-        uploadProfilePicture(image: image)
-    }
-    
-    // Called when cancel taking picture or photo selection
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true)
-    }
+extension ProfileViewController: UINavigationControllerDelegate {
     
     func downloadURL(for email: String?) {
         guard let safeEmail = email else { return }
@@ -183,10 +102,14 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         let path = "images/" + filename
         
+        // Set a placeholder image while waiting for the new image to download
+        profileImageView.image = UIImage(systemName: "person.circle")
+        
         StorageManager.shared.downloadURL(for: path, completion: { result in
             switch result {
             case .success(let url):
                 DispatchQueue.main.async { [weak self] in
+                    // Set the downloaded image
                     self?.profileImageView.sd_setImage(with: url)
                 }
                 
@@ -194,6 +117,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
                 print("Failed to get download URL: \(error)")
             }
         })
+    }
+    
+    private func logOutError(message: String) {
+        let ac = UIAlertController(title: "Log Out Error", message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(ac, animated: true)
     }
 }
 

@@ -137,7 +137,7 @@ class LogInViewController: UIViewController {
     }
     
     private func logInError(message: String) {
-        let ac = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let ac = UIAlertController(title: "Log In Error", message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(ac, animated: true)
     }

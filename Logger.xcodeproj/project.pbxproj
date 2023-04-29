@@ -658,6 +658,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Logger/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Logger;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera usage required to take profile pictures";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo Libary usage required to select profile pictures";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -688,6 +691,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Logger/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Logger;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera usage required to take profile pictures";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo Libary usage required to select profile pictures";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
