@@ -2,9 +2,9 @@
 Logger is an iOS app built using UIKit and Swift to allow users to register and log in. The app uses Firebase Authentication, Firebase Realtime Database to store user information, and Firebase Storage to store user profile pictures. The app requires iOS 15.5 or later to run.
 
 # Features
-Firebase Authentication: The app uses Firebase Authentication to handle user registration and login.
-Firebase Realtime Database: The app uses Firebase Realtime Database to store user information such as the first name, last name, and email.
-Firebase Storage: The app uses Firebase Storage to store user profile pictures.
+Authentication: The app uses Firebase Authentication to handle user registration and login.
+Database: The app uses Firebase Realtime Database to store user information such as the first name, last name, and email.
+Storage: The app uses Firebase Storage to store user profile pictures.
 SDWebImage: The app uses SDWebImage to cache profile pictures for faster loading.
 
 # Installation
